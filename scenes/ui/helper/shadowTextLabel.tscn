@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tres/fonts/libremon_custom.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/ui/helper/shadowTextLabel.gd" type="Script" id=2]
+
+[node name="ShadowLabel" type="Label"]
+margin_bottom = -132.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.745098, 0.745098, 0.745098, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="OtherShadow" type="Label" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.745098, 0.745098, 0.745098, 1 )
+custom_colors/font_color_shadow = Color( 0.745098, 0.745098, 0.745098, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = ExtResource( 1 )

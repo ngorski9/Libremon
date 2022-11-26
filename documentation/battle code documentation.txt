@@ -1,0 +1,136 @@
+--- The most important function ---
+
+print( Output ) - prints to console. For debugging purposes only.
+
+--- Control Actions ---
+
+keep(return_value = "") - Specifies that other states may continue to listen to the hook. Also, if applicable,
+			   the current action will not be canceled. If the parameter is set, can also change the return
+			   value.
+
+return( Value ) - sets the return value and ends the code.
+
+squash(return_value = "") - Specifies that other states may not continue to listen to the hook, however the code from
+			     the current listener will be allowed to finish. Also, if applicable, the current action will be
+			     canceled.
+
+--- Battle Actions ---
+
+animation( animation_code )
+applyState( state_name, constructor_args = {}, target_key = TARGET_KEY, user_key = USER_KEY, args = {}, owner_id = getOwnId()) 
+    -> Target is Ally, Ally2, Enemy, Enemy2, Battlefield, AllySide, or
+       EnemySide
+    -> Note if only two arguments are included, the final of which is a dictionary, that dictionary will be
+       assumed to be the constructor args, not the action params like in the case of other functions
+damage( amount, target_key = TARGET_KEY, user_key = USER_KEY, mode = "Effect", type = "Untyped", args = {}, owner_id = getOwnId() )
+hit( power = getOwnMoveValue( "Power" ), type = getOwnMoveValue( "Type" ), mode = getOwnMoveValue( "Mode" ), target_key = TARGET_KEY,
+     user_key = USER_KEY, args = {}, owner_id = getOwnId() )
+move( name, target_key = TARGET_KEY, user_key = USER_KEY, args = {}, owner_id = getOwnId() )
+    -> Adds a move to the move queue, and won't necessarily be activated right away.
+    -> The only optional argument is the final one
+moveNow( name, target_key = TARGET_KEY, user_key = USER_KEY, args = {}, owner_id = getOwnId() )
+    -> Immediately uses a move and executes its code.
+percentChance( chance, reason = STACK[0][0].name, target_key = TARGET_KEY, user_key = USER_KEY, args = {}, owner_id = getOwnId() )
+removeState( target_key, which, user_key, args = {}, owner_id = getOwnId() )
+
+--- Action Getters ---
+
+Note: These behave like actions but get their own section. Each one sets the value of a variable, which is the first parameter,
+      to something specified by the other parameters. These need to be actions because they can trigger hooks
+
+getMonsterProperty( var, who, property, reason = STACK[0][0].name, target_key = TARGET_KEY, user_key = USER_KEY, args = {}, owner_id = getOwnId())
+	- Sets value of variable Var to the value of the given Property of Who (which is a key)
+getRandomFloat( var, reason = STACK[0][0].name, target_key = TARGET_KEY, user_key = USER_KEY, args = {}, owner_id = getOwnId() )
+getRandomInt( var, min, max, reason = STACK[0][0].name, target_key = TARGET_KEY, user_key = USER_KEY, args = {}, owner_id = getOwnId() )
+
+--- Non Action Getters ---
+
+Note: These function act like values and do not set variables
+
+- Get move/state IDs and values -
+
+getMovesByOwner( Who ) - returns a list
+getMoveValue( ID, property )
+getOwnId()
+getOwnMoveValue( property )
+
+- Get values from the hook stack -
+
+Note: a depth of zero in the stack will indicate the current state and current hook
+
+getCallingHook( depth )
+getCallingState( depth )
+getCallingStateId( depth )
+getCallingStateName( depth )
+getRootHook()
+getRootState()
+getRootStateId()
+getRootStateName()
+
+--- Action Setters ---
+
+set( Variable, Value ) - can also use =, +=, -=, *=, /=
+setAtIndex( Root, Index, Value )
+	- is the equivalent of Root[Index] = Value.
+	- this only exists because a new action needed to be added in order to implement the above syntax.
+setArgument( Argument, Value, Update_Values = true )
+
+--- Control ---
+
+applyToSide( Side key ){ Actions } - everyone that you want it to apply to should be labeled as TARGET
+chain{ Actions } - Will perform the actions until one of them is squashed
+do{ Actions }
+if( Bool expression ){ Actions }
+if(Bool expression){ If Actions }else{ Actions }
+repeat( Times ){ Actions }
+while( Condition ){ Actions }
+
+--- Arguments and Variables ---
+
+Note* do not put A: or V: in front of variable / param names except
+      for the first 2 commands
+
+xyz   - variable or parameter name
+isVarSet( Variable ) -> bool : whether or not the variable is set
+isArgSet( Parameter ) -> bool : whether or not the param is set
+
+--- Numbers ---
+
+123 - number literal
+
+abs( num )
+add( num1, num2 ) or +
+ceil( num )
+div( num1, num2 ) or /
+floor( num )
+mul( num1, num2 ) or *
+opposite( num ) or -
+pow( num1, num2 ) or **
+sub( num1, num2 ) or -
+typeMultiplier( (hit_type), (receive_type) )
+
+--- Bools ---
+
+true false - bool literal
+
+and( bool1, bool2 ) or and
+not( bool ) or not
+or( bool1, bool2 ) or or
+
+equal( Thing1, Thing2 ) or ==
+greater( thing1, thing2 ) or >
+greaterEqual(thing1, thing2 ) or >=
+lesser( thing1, thing2 ) or <
+lesserEqual(thing1, thing2) or <=
+notEqual(thing1, thing2) or !=
+
+--- Typecasting ---
+
+num( value )
+str( value )
+
+--- Lists and dictionaries ---
+
+keys( dict )
+values( dict )
+in( value, list ) or in

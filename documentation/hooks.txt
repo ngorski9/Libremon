@@ -1,0 +1,177 @@
+State paramaters common to all hooks:
+
+PURPOSE - Feral or Person
+FORMAT - Single or Double
+
+SELF - the owner of the state
+SELF_KEY - a string showing who owns it, Ally, Ally2, Enemy, Enemy2,
+           Ally Side, Enemy Side, or Battlefield
+PARTNER - the doubles partner of the owner (if applicable)
+PARTNER_KEY - a string showing who is the doubles partner of the owner               (if applicable)
+OPPONENT     - the "opponent 1" of the user
+OPPONENT_KEY - a string representing the "opponent 1"
+OPPONENT2
+OPPONENT2_KEY
+SELF_SIDE_KEY           - equal to AllySide or EnemySide
+OPPOSITE_SIDE_KEY  - equal to AllySide or EnemySide
+
+Also, many sections use the "Target User Arguments" which describe
+moves that target. Not every key may be set depending on the context
+(i.e. if TARGET_KEY is "Battlefield", then target will not be set),
+so make sure to check, when relevant.
+
+TARGET
+TARGET_KEY
+TARGET_PARTNER
+TARGET_PARTNER_KEY
+TARGET_SIDE_KEY
+USER
+USER_KEY
+USER_PARTNER
+USER_PARTNER_KEY
+USER_SIDE_KEY
+
+Further, hooks which are primarily used for calculating values (i.e. "OnPriorityDetermined")
+use the "Value Arguments". These arguments have:
+
+ORIGINAL_VALUE
+CURRENT_VALUE   - the value after it has already been modified by various hooks
+
+Additionally, some hooks which involve a certain state of interest use the "State Arguments". These arguments have:
+
+STATE
+STATE_NAME
+STATE_ID
+
+Finally, hooks which respond directly to actions (e.g. OnOtherStateApplied, OnAfterDamage, etc.) have as arguments each of the
+parameters of the actions that they are responding to. The parameter names are in all caps.
+
+--- When switching the menu mode ---
+
+These use the target user args, where the target is just "Enemy" if
+used by an ally and "Ally" if used by an enemy.
+
+OnMenuModeMain - done
+	- uses default arguments only
+
+OnMenuModeFight - done
+	- squash with "Cancel" to send back to main menu
+	- squash with a number to have the monster use that move number
+	- squash with a move name to have that monster use that move
+	  (does not deduct mana)
+
+OnMenuModeTarget - done
+	- squash with 0 or 1 to choose the target. Squash with "Both" for both targets.
+
+--- When selecting something in a menu ---
+
+These use the target user args
+
+OnTargetSelected - done
+	- squash prevents something from being targeted
+
+OnMoveSelected - done
+	- target is "Enemy" if used by an ally and "Ally" if used
+	  by an enemy.
+	- has additional parameters MOVE_NUMBER (which move slot 
+	  of the monster's it is), MOVE_NAME, and MOVE
+	- squash to prevent the move from being used
+
+--- When calculating properties ---
+
+Uses the value arguments
+Has an argument called PROPERTY which is equal to the name of the stat/property determined
+
+OnMonsterValueDetermined - done
+	- also has custom parameters MONSTER and MONSTER_KEY
+
+--- When states are applied ---
+
+Uses the target user args
+
+OnApplication - done
+	- functions as a constructor
+	- also gets arguments from the "constructor_args" parameter of ApplyState
+	- can squash itself to prevent the state from being applied
+
+OnOtherStateApplied - done
+	- also uses the state args
+
+OnAfterStateApplied - done
+	- also uses the state args
+
+--- When effect damage is dealt ---
+
+Uses the target user arguments
+
+OnEffectDamageValuesDetermined - done
+	- uses the value arguments. The original value is a dictionary containing:
+		DAMAGE_AMOUNT, PERCEIVED_TYPE, and FORM_VALUE. FORM_VALUE should be either Contact, Special, or Effect
+OnEffectDamage - done
+	- has the argument DAMAGE_AMOUNT, which is the amount of damage actually dealt, which is different from the parameter argument
+	  DAMAGE, which is the original value of the damage parameter.
+	- similarly, has the arguments PERCEIVED_TYPE and FORM_VALUE, which are the actual values of the type and mode parameters, which are
+	  distinguished from the values part of the original command.
+
+OnAfterEffectDamage - done
+	- has the same arguments as OnEffectDamage
+	- also has the argument DEALT_DAMAGE_AMOUNT, which is the amount of damage which was actually dealt.
+
+--- When hitting the opponent ---
+
+OnHitComponentsDetermined - done
+	- uses the values arguments. The original value is a dictionary containing:
+		 POWER_VALUE, STAB, STRENGTH_STAT, DEFENSE_STAT, TYPE_MULTIPLIER, PERCEIVED_TYPE, FORM_VALUE, OTHER_MULTIPLIER
+		 	- PERCEIVED_TYPE does not affect the damage value but is the "type" of the damage dealt in deal_damage.
+
+OnHitDamageDetermined - done
+	- uses the value arguments. The original value is the amount of damage that would be dealt.
+	- each of the components from the previous hook are now their own arguments as well. Note that POWER_VALUE represents
+	  the power calculated from the previous hook. The argument POWER is set to the original power of the hit.
+	
+OnHit - done
+	- each of the arguments from the above hook is present, as well as DAMAGE_AMOUNT. There are no value arguments.
+
+OnAfterHit - done
+	- each of the arguments from the above hook is present, as well as DAMAGE_AMOUNT. There are no value arguments.
+
+--- When dealing damage ---
+
+uses the target user arguments
+
+OnDamageValuesDetermined
+	- uses the value arguments. The original value is a dictionary containing:
+		POWER_VALUE, STAB, STRENGTH_STAT, DEFENSE_STAT, TYPE_MULTIPLIER, MISC_MULTIPLIER, PERCEIVED_TYPE, FORM_VALUE
+OnDamage
+	- also has as arguments an argument with the same name as each key in the dictionary for the above hook
+
+OnAfterDamage
+	- happens after damage is dealt and after fainting, but before switch-ins which happen at the end of the turn.
+	- same arguments as OnDamage
+
+OnCreatureFaint
+OnSwitchIn
+
+--- Hooks ---
+
+OnApplication         - runs when the owning state is activated - done
+OnOtherStateApplied   - runs from existing states when a new state is applied - done
+OnAfterStateApplied - done
+OnRemoved - done but needs testing
+OnOtherStateRemoved
+
+--- When hooks do things ---
+
+OnHookActivate - when a hook activates
+OnHookSquash - when state code squashes something
+
+--- End of turn ---
+
+OnTurnEnd - done
+
+--- Non-hookable hooks ---
+
+You cannot hook on to these, but these names may appear in the stack in order to indicate the context in which something is happening
+
+OnMoveMainCode
+OnSetActionNumbers

@@ -1,0 +1,113 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/ui/party screen/libreboxes.png" type="Texture" id=1]
+[ext_resource path="res://assets/fonts/libremon_custom.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/ui/party screen/healthbars.png" type="Texture" id=3]
+[ext_resource path="res://scenes/ui/helper/genderLabel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/ui/single use/librebox.gd" type="Script" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 76, 220, 76 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 456, 220, 76 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 220, 76 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 96, 8 )
+
+[node name="Control" type="TextureButton" groups=["librebox"]]
+anchor_right = 0.458
+anchor_bottom = 0.237
+margin_right = 0.160004
+margin_bottom = 0.159996
+action_mode = 0
+texture_normal = SubResource( 1 )
+texture_disabled = SubResource( 2 )
+texture_focused = SubResource( 5 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="."]
+margin_left = 82.0
+margin_top = 6.0
+margin_right = 162.0
+margin_bottom = 34.0
+custom_colors/font_color_shadow = Color( 0.133333, 0.133333, 0.133333, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = SubResource( 3 )
+text = "Squirtle"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelLabel" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 46.0
+margin_right = 64.0
+margin_bottom = 74.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.133333, 0.133333, 0.133333, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = SubResource( 3 )
+text = "Lv. 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPLabel" type="Label" parent="."]
+margin_left = 98.0
+margin_top = 46.0
+margin_right = 174.0
+margin_bottom = 74.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.133333, 0.133333, 0.133333, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = SubResource( 3 )
+text = "100/100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="TextureProgress" parent="."]
+margin_left = 112.0
+margin_top = 40.0
+margin_right = 208.0
+margin_bottom = 48.0
+value = 100.0
+texture_progress = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MonsterIcon" type="TextureRect" parent="."]
+margin_right = 64.01
+margin_bottom = 63.992
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="genderLabel" parent="." instance=ExtResource( 4 )]
+margin_left = 198.0
+margin_top = 10.0
+margin_right = 238.0
+margin_bottom = 38.0
+
+[connection signal="focus_entered" from="." to="." method="_on_Control_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_Control_focus_exited"]

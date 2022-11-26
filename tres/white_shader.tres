@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform float whitening;
+
+void fragment() {
+    /*COLOR = vec4(1.0, 1.0, 1.0, texture(TEXTURE, UV).a);*/
+	if(texture(TEXTURE, UV).a > 0.0){
+		COLOR = vec4(1.0,1.0,1.0,1.0);
+	}
+	else{
+		COLOR = vec4(1.0,1.0,1.0,0.0);
+	}
+}"
+
+[resource]
+shader = SubResource( 2 )
+shader_param/whitening = null

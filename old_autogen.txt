@@ -1,0 +1,18 @@
+			# If the move is set to autoencode, builds a move code
+			# based on the information provided.
+			# Hit if appropriate, display an animation, and
+			# target multiple opponents if appropriate
+			if move.power != null:
+				move.code = "Hit(USER_KEY," + str(move.power) + ',"' + str(move.type) + '","' + str(move.mode) + '",A:TARGET_KEY);'
+			var animation = line[10]
+
+			var min_times = null
+
+			if move.targets == 2:
+				move.code = "ApplyToSide(A:TARGET_SIDE," + move.code + ");"
+
+			# Animations are separated by ; but it's not multiple statements like general state code
+			if animation != "":
+				animation = ";" + animation
+
+			move.code = "Animation(" + '"Txt:|A:USER.name| used ' + move.name + animation + '&Wait:0.8");' + move.code

@@ -1,0 +1,896 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://scenes/ui/helper/arrowButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/ui/helper/shadowTextLabel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ui/helper/genderLabel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tres/fonts/libremon_custom_small.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/ui/party screen/healthbars.png" type="Texture" id=5]
+[ext_resource path="res://scenes/ui/helper/typeLabel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/ui/text boxes/textbox.png" type="Texture" id=7]
+[ext_resource path="res://scenes/battle/battle.gd" type="Script" id=8]
+[ext_resource path="res://assets/battle/trainers/default.png" type="Texture" id=9]
+[ext_resource path="res://assets/battle/backgrounds/Default.png" type="Texture" id=10]
+[ext_resource path="res://assets/battle/platforms/Default.png" type="Texture" id=11]
+[ext_resource path="res://assets/battle/ui/summary_boxes.png" type="Texture" id=12]
+[ext_resource path="res://assets/battle/trainers/trainer.png" type="Texture" id=13]
+[ext_resource path="res://assets/battle/ui/exp.png" type="Texture" id=14]
+[ext_resource path="res://scenes/battle/monster_in_battle.tscn" type="PackedScene" id=15]
+[ext_resource path="res://tres/white_shader.tres" type="Material" id=16]
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 240, 66 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 96, 6 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 132, 240, 66 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 96, 6 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 96, 6 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 198, 240, 66 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 96, 6 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 96, 6 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 66, 240, 66 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 96, 6 )
+
+[sub_resource type="Animation" id=19]
+resource_name = "Contract Box"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainTextBox:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 480, 84 ), Vector2( 480, 54 ) ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "Expand Box"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainTextBox:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 480, 54 ), Vector2( 480, 84 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Opener"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("screenFillTop:margin_bottom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 160.0, 80, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("screenFillBottom:margin_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -160.0, -80, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("allyArea:margin_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -164.0, 40.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MainTextBox:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -54 ), Vector2( 0, -54 ), Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("enemyArea:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 212, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("allyArea:rect_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -204, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+tracks/0/type = "value"
+tracks/0/path = NodePath("screenFillTop:margin_bottom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 160.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("screenFillBottom:margin_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -160.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("enemyArea:margin_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -520.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("allyArea:margin_left")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 530.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("allyArea:margin_right")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 520.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("enemyArea:margin_right")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -480.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("MainTextBox:rect_position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -54 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("enemyArea:rect_position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 212, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("allyArea:rect_position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -204, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("MainTextBox:rect_size")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 480, 54 ) ]
+}
+
+[node name="Battle" type="TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 10 )
+script = ExtResource( 8 )
+
+[node name="MainTextBox" type="NinePatchRect" parent="."]
+margin_top = -54.0
+margin_right = 480.0
+texture = ExtResource( 7 )
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainText" parent="MainTextBox" instance=ExtResource( 2 )]
+margin_left = 18.0
+margin_top = 12.0
+margin_right = 464.0
+margin_bottom = 40.0
+
+[node name="Choices" type="HBoxContainer" parent="MainTextBox"]
+visible = false
+margin_left = 10.0
+margin_right = 470.0
+margin_bottom = 40.0
+custom_constants/separation = 42
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FightButton" parent="MainTextBox/Choices" instance=ExtResource( 1 )]
+margin_left = 55.0
+margin_top = 12.0
+margin_right = 111.0
+margin_bottom = 40.0
+text = "| Fight"
+real_text = "Fight"
+
+[node name="ItemButton" parent="MainTextBox/Choices" instance=ExtResource( 1 )]
+margin_left = 153.0
+margin_top = 12.0
+margin_right = 205.0
+margin_bottom = 40.0
+text = "| Item"
+real_text = "Item"
+
+[node name="SwitchButton" parent="MainTextBox/Choices" instance=ExtResource( 1 )]
+margin_left = 247.0
+margin_top = 12.0
+margin_right = 315.0
+margin_bottom = 40.0
+text = "| Switch"
+real_text = "Switch"
+
+[node name="FleeButton" parent="MainTextBox/Choices" instance=ExtResource( 1 )]
+margin_left = 357.0
+margin_top = 12.0
+margin_right = 405.0
+margin_bottom = 40.0
+text = "| Flee"
+real_text = "Flee"
+
+[node name="Moves" type="Control" parent="MainTextBox"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MainTextBox/Moves"]
+margin_left = 314.0
+margin_right = 480.0
+margin_bottom = 84.0
+texture = ExtResource( 7 )
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Move1Button" parent="MainTextBox/Moves" instance=ExtResource( 1 )]
+margin_left = 18.0
+margin_top = 12.0
+margin_right = 146.0
+margin_bottom = 40.0
+focus_neighbour_left = NodePath("../Move2Button")
+focus_neighbour_right = NodePath("../Move3Button")
+text = "| Draco Meteor"
+real_text = "Draco Meteor"
+
+[node name="Move2Button" parent="MainTextBox/Moves" instance=ExtResource( 1 )]
+margin_left = 18.0
+margin_top = 40.0
+margin_right = 146.0
+margin_bottom = 68.0
+focus_neighbour_top = NodePath("../Move1Button")
+focus_neighbour_right = NodePath("../Move4Button")
+text = "| Draco Meteor"
+real_text = "Draco Meteor"
+
+[node name="Move3Button" parent="MainTextBox/Moves" instance=ExtResource( 1 )]
+margin_left = 160.0
+margin_top = 12.0
+margin_right = 288.0
+margin_bottom = 40.0
+focus_neighbour_left = NodePath("../Move1Button")
+focus_neighbour_bottom = NodePath("../Move4Button")
+text = "| Draco Meteor"
+real_text = "Draco Meteor"
+
+[node name="Move4Button" parent="MainTextBox/Moves" instance=ExtResource( 1 )]
+margin_left = 160.0
+margin_top = 40.0
+margin_right = 288.0
+margin_bottom = 68.0
+focus_neighbour_left = NodePath("../Move2Button")
+focus_neighbour_top = NodePath("../Move3Button")
+text = "| Draco Meteor"
+real_text = "Draco Meteor"
+
+[node name="TypeLabel" parent="MainTextBox/Moves" instance=ExtResource( 6 )]
+visible = false
+margin_left = 306.0
+margin_top = 16.0
+margin_right = 370.0
+margin_bottom = 38.0
+
+[node name="ManaCostLabel" parent="MainTextBox/Moves" instance=ExtResource( 2 )]
+margin_left = 332.0
+margin_top = 12.0
+margin_right = 444.0
+margin_bottom = 40.0
+text = "Mana Cost:"
+
+[node name="ManaLeftLabel" parent="MainTextBox/Moves" instance=ExtResource( 2 )]
+margin_left = 332.0
+margin_top = 42.0
+margin_right = 490.0
+margin_bottom = 70.0
+text = "Mana Left:"
+
+[node name="ManaCostNumberLabel" parent="MainTextBox/Moves" instance=ExtResource( 2 )]
+margin_left = 436.0
+margin_top = 12.0
+margin_right = 464.0
+margin_bottom = 40.0
+text = "100"
+align = 2
+
+[node name="ManaLeftNumberLabel" parent="MainTextBox/Moves" instance=ExtResource( 2 )]
+margin_left = 436.0
+margin_top = 42.0
+margin_right = 464.0
+margin_bottom = 70.0
+text = "100"
+align = 2
+
+[node name="allyArea" type="Control" parent="."]
+margin_left = -204.0
+margin_right = -204.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="allyPlatform" type="TextureRect" parent="allyArea"]
+margin_left = -48.0
+margin_top = 204.0
+margin_right = 204.0
+margin_bottom = 268.0
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="allyPerson" type="TextureRect" parent="allyArea"]
+margin_left = 46.0
+margin_top = 106.0
+margin_right = 114.0
+margin_bottom = 242.0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="allySprite" parent="allyArea" instance=ExtResource( 15 )]
+margin_left = 46.0
+margin_top = 106.0
+margin_right = 46.0
+margin_bottom = 106.0
+
+[node name="allySprite2" parent="allyArea" instance=ExtResource( 15 )]
+margin_left = 2.0
+margin_top = 124.0
+margin_right = 2.0
+margin_bottom = 124.0
+
+[node name="allySummary" type="TextureRect" parent="allyArea"]
+margin_top = 320.0
+margin_right = 244.0
+margin_bottom = 386.0
+texture = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="genderLabel" parent="allyArea/allySummary" instance=ExtResource( 3 )]
+margin_left = 138.0
+margin_top = 16.0
+margin_right = 150.0
+margin_bottom = 44.0
+
+[node name="nameLabel" parent="allyArea/allySummary" instance=ExtResource( 2 )]
+margin_left = 6.0
+margin_top = 14.0
+margin_right = 126.0
+margin_bottom = 42.0
+text = "ZZZZZZZZZZ"
+
+[node name="percentLabel" parent="allyArea/allySummary" instance=ExtResource( 2 )]
+margin_left = 116.0
+margin_top = 32.0
+margin_right = 152.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 4 )
+text = "100%"
+align = 2
+font_size = 0
+
+[node name="lvLabel" parent="allyArea/allySummary" instance=ExtResource( 2 )]
+margin_left = 172.0
+margin_top = 34.0
+margin_right = 216.0
+margin_bottom = 58.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.156863, 0.156863, 0.156863, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "lv.100"
+color_scheme = 1
+font_size = 0
+
+[node name="hpProgress" type="TextureProgress" parent="allyArea/allySummary"]
+margin_left = 10.0
+margin_top = 48.0
+margin_right = 106.0
+margin_bottom = 54.0
+texture_progress = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="expProgress" type="TextureProgress" parent="allyArea/allySummary"]
+margin_top = 6.0
+margin_right = 160.0
+margin_bottom = 10.0
+value = 100.0
+texture_progress = ExtResource( 14 )
+
+[node name="silhouette" type="TextureRect" parent="allyArea/allySummary"]
+visible = false
+material = ExtResource( 16 )
+margin_right = 244.0
+margin_bottom = 66.0
+texture = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="allySummaryDouble" type="TextureRect" parent="allyArea"]
+margin_top = 320.0
+margin_right = 240.0
+margin_bottom = 386.0
+texture = SubResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="expProgressTop" type="TextureProgress" parent="allyArea/allySummaryDouble"]
+margin_top = 8.0
+margin_right = 160.0
+margin_bottom = 12.0
+texture_progress = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hpProgressTop" type="TextureProgress" parent="allyArea/allySummaryDouble"]
+margin_left = 10.0
+margin_top = 22.0
+margin_right = 106.0
+margin_bottom = 28.0
+texture_progress = SubResource( 8 )
+
+[node name="percentLabelTop" parent="allyArea/allySummaryDouble" instance=ExtResource( 2 )]
+margin_left = 116.0
+margin_top = 8.0
+margin_right = 152.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 4 )
+text = "100%"
+align = 2
+font_size = 0
+
+[node name="lvLabelTop" parent="allyArea/allySummaryDouble" instance=ExtResource( 2 )]
+margin_left = 172.0
+margin_top = 8.0
+margin_right = 216.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.156863, 0.156863, 0.156863, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Lv.100"
+color_scheme = 1
+font_size = 0
+
+[node name="hpProgressBottom" type="TextureProgress" parent="allyArea/allySummaryDouble"]
+margin_left = 10.0
+margin_top = 40.0
+margin_right = 106.0
+margin_bottom = 46.0
+texture_progress = SubResource( 9 )
+
+[node name="percentLabelBottom" parent="allyArea/allySummaryDouble" instance=ExtResource( 2 )]
+margin_left = 116.0
+margin_top = 26.0
+margin_right = 152.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 4 )
+text = "100%"
+align = 2
+font_size = 0
+
+[node name="lvLabelBottom" parent="allyArea/allySummaryDouble" instance=ExtResource( 2 )]
+margin_left = 172.0
+margin_top = 26.0
+margin_right = 216.0
+margin_bottom = 50.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.156863, 0.156863, 0.156863, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Lv.100"
+color_scheme = 1
+font_size = 0
+
+[node name="expProgressBottom" type="TextureProgress" parent="allyArea/allySummaryDouble"]
+margin_top = 56.0
+margin_right = 160.0
+margin_bottom = 60.0
+texture_progress = ExtResource( 14 )
+
+[node name="silhouette" type="TextureRect" parent="allyArea/allySummaryDouble"]
+visible = false
+material = ExtResource( 16 )
+margin_right = 240.0
+margin_bottom = 66.0
+texture = SubResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="enemyArea" type="Control" parent="."]
+margin_left = 212.0
+margin_right = 252.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="enemyPlatform" type="TextureRect" parent="enemyArea"]
+margin_left = 266.0
+margin_top = 204.0
+margin_right = 518.0
+margin_bottom = 268.0
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="enemyPerson" type="TextureRect" parent="enemyArea"]
+margin_left = 348.0
+margin_top = 106.0
+margin_right = 422.0
+margin_bottom = 244.0
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="enemySprite" parent="enemyArea" instance=ExtResource( 15 )]
+margin_left = 302.0
+margin_top = 106.0
+margin_right = 302.0
+margin_bottom = 106.0
+ally = false
+
+[node name="enemySprite2" parent="enemyArea" instance=ExtResource( 15 )]
+margin_left = 346.0
+margin_top = 128.0
+margin_right = 346.0
+margin_bottom = 128.0
+ally = false
+
+[node name="enemySummaryDouble" type="TextureRect" parent="enemyArea"]
+margin_left = 240.0
+margin_top = 320.0
+margin_right = 480.0
+margin_bottom = 386.0
+texture = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hpProgressTop" type="TextureProgress" parent="enemyArea/enemySummaryDouble"]
+margin_left = 134.0
+margin_top = 22.0
+margin_right = 230.0
+margin_bottom = 28.0
+value = 100.0
+texture_progress = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="percentLabelTop" parent="enemyArea/enemySummaryDouble" instance=ExtResource( 2 )]
+margin_left = 88.0
+margin_top = 8.0
+margin_right = 124.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 4 )
+text = "100%"
+align = 2
+font_size = 0
+
+[node name="lvLabelTop" parent="enemyArea/enemySummaryDouble" instance=ExtResource( 2 )]
+margin_left = 24.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.156863, 0.156863, 0.156863, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Lv.100"
+color_scheme = 1
+font_size = 0
+
+[node name="hpProgressBottom" type="TextureProgress" parent="enemyArea/enemySummaryDouble"]
+margin_left = 134.0
+margin_top = 40.0
+margin_right = 230.0
+margin_bottom = 46.0
+value = 100.0
+texture_progress = SubResource( 11 )
+
+[node name="percentLabelBottom" parent="enemyArea/enemySummaryDouble" instance=ExtResource( 2 )]
+margin_left = 88.0
+margin_top = 26.0
+margin_right = 124.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 4 )
+text = "100%"
+align = 2
+font_size = 0
+
+[node name="lvLabelBottom" parent="enemyArea/enemySummaryDouble" instance=ExtResource( 2 )]
+margin_left = 24.0
+margin_top = 26.0
+margin_right = 68.0
+margin_bottom = 50.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.156863, 0.156863, 0.156863, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Lv.100"
+color_scheme = 1
+font_size = 0
+
+[node name="silhouette" type="TextureRect" parent="enemyArea/enemySummaryDouble"]
+visible = false
+material = ExtResource( 16 )
+margin_right = 240.0
+margin_bottom = 66.0
+texture = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="enemySummary" type="TextureRect" parent="enemyArea"]
+margin_left = 240.0
+margin_top = 320.0
+margin_right = 480.0
+margin_bottom = 386.0
+texture = SubResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nameLabel" parent="enemyArea/enemySummary" instance=ExtResource( 2 )]
+margin_left = 114.0
+margin_top = 14.0
+margin_right = 234.0
+margin_bottom = 42.0
+text = "ZZZZZZZZZZ"
+align = 2
+
+[node name="lvLabel" parent="enemyArea/enemySummary" instance=ExtResource( 2 )]
+margin_left = 24.0
+margin_top = 34.0
+margin_right = 68.0
+margin_bottom = 58.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.156863, 0.156863, 0.156863, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "lv.100"
+align = 2
+color_scheme = 1
+font_size = 0
+
+[node name="percentLabel" parent="enemyArea/enemySummary" instance=ExtResource( 2 )]
+margin_left = 90.0
+margin_top = 32.0
+margin_right = 126.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 4 )
+text = "100%"
+align = 2
+font_size = 0
+
+[node name="genderLabel" parent="enemyArea/enemySummary" instance=ExtResource( 3 )]
+margin_left = 90.0
+margin_top = 16.0
+margin_right = 102.0
+margin_bottom = 44.0
+
+[node name="hpProgress" type="TextureProgress" parent="enemyArea/enemySummary"]
+margin_left = 134.0
+margin_top = 48.0
+margin_right = 230.0
+margin_bottom = 54.0
+value = 100.0
+texture_progress = SubResource( 3 )
+
+[node name="silhouette" type="TextureRect" parent="enemyArea/enemySummary"]
+visible = false
+material = ExtResource( 16 )
+margin_right = 240.0
+margin_bottom = 66.0
+texture = SubResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="screenFillTop" type="ColorRect" parent="."]
+margin_right = 480.0
+margin_bottom = 160.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="screenFillBottom" type="ColorRect" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -160.0
+margin_right = 480.0
+grow_vertical = 0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Contract Box" = SubResource( 19 )
+"anims/Expand Box" = SubResource( 18 )
+anims/Opener = SubResource( 5 )
+anims/RESET = SubResource( 4 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="pressed" from="MainTextBox/Choices/FightButton" to="." method="_on_FightButton_pressed"]
+[connection signal="focus_entered" from="MainTextBox/Moves/Move1Button" to="." method="on_MoveButton_focus_enter" binds= [ 0 ]]
+[connection signal="pressed" from="MainTextBox/Moves/Move1Button" to="." method="on_MoveButton_press" binds= [ 0 ]]
+[connection signal="focus_entered" from="MainTextBox/Moves/Move2Button" to="." method="on_MoveButton_focus_enter" binds= [ 1 ]]
+[connection signal="pressed" from="MainTextBox/Moves/Move2Button" to="." method="on_MoveButton_press" binds= [ 1 ]]
+[connection signal="focus_entered" from="MainTextBox/Moves/Move3Button" to="." method="on_MoveButton_focus_enter" binds= [ 2 ]]
+[connection signal="pressed" from="MainTextBox/Moves/Move3Button" to="." method="on_MoveButton_press" binds= [ 2 ]]
+[connection signal="focus_entered" from="MainTextBox/Moves/Move4Button" to="." method="on_MoveButton_focus_enter" binds= [ 3 ]]
+[connection signal="pressed" from="MainTextBox/Moves/Move4Button" to="." method="on_MoveButton_press" binds= [ 3 ]]
+[connection signal="animation_finished" from="allyArea/allySprite" to="." method="on_any_animation_terminate"]
+[connection signal="animation_finished" from="allyArea/allySprite2" to="." method="on_any_animation_terminate"]
+[connection signal="value_changed" from="allyArea/allySummary/hpProgress" to="." method="on_hpBar_value_change" binds= [ "Ally Single" ]]
+[connection signal="value_changed" from="allyArea/allySummaryDouble/hpProgressTop" to="." method="on_hpBar_value_change" binds= [ "Ally Double Top" ]]
+[connection signal="value_changed" from="allyArea/allySummaryDouble/hpProgressBottom" to="." method="on_hpBar_value_change" binds= [ "Ally Double Bottom" ]]
+[connection signal="animation_finished" from="enemyArea/enemySprite" to="." method="on_any_animation_terminate"]
+[connection signal="animation_finished" from="enemyArea/enemySprite2" to="." method="on_any_animation_terminate"]
+[connection signal="value_changed" from="enemyArea/enemySummaryDouble/hpProgressTop" to="." method="on_hpBar_value_change" binds= [ "Enemy Double Top" ]]
+[connection signal="value_changed" from="enemyArea/enemySummaryDouble/hpProgressBottom" to="." method="on_hpBar_value_change" binds= [ "Enemy Double Bottom" ]]
+[connection signal="value_changed" from="enemyArea/enemySummary/hpProgress" to="." method="on_hpBar_value_change" binds= [ "Enemy Single" ]]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

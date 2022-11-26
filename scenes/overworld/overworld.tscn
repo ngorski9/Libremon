@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/ui/helper/optionBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/overworld/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/overworld/overworld.gd" type="Script" id=3]
+[ext_resource path="res://scenes/overworld/overworld_ui.gd" type="Script" id=4]
+[ext_resource path="res://assets/fonts/alterebro.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://scenes/ui/single use/party_screen.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/ui/single use/summary_screen.tscn" type="PackedScene" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 5 )
+
+[node name="Overworld" type="Node2D"]
+script = ExtResource( 3 )
+start_room = "Start"
+player_spawn_position = Vector2( 12, 10 )
+preview = false
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 8, 8 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+pause_mode = 2
+script = ExtResource( 4 )
+
+[node name="PartyScreen" parent="UI" instance=ExtResource( 6 )]
+visible = false
+margin_right = 440.0
+margin_bottom = 280.0
+
+[node name="PauseMenu" type="Control" parent="UI"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseBox" parent="UI/PauseMenu" instance=ExtResource( 1 )]
+margin_left = 320.0
+margin_top = 16.0
+margin_right = 464.0
+margin_bottom = 240.0
+choices = [ "Wikidex", "Libremon", "Bag", "Nathan", "Save", "Options", "Exit" ]
+font = SubResource( 1 )
+
+[node name="SummaryScreen" parent="UI" instance=ExtResource( 7 )]
+visible = false
+
+[connection signal="done_walking" from="Player" to="." method="_on_Player_done_walking"]
+[connection signal="exit" from="UI/PartyScreen" to="UI" method="on_menu_screen_exit" flags=3 binds= [ "Party" ]]
+[connection signal="button_pressed" from="UI/PauseMenu/PauseBox" to="UI" method="_on_PauseBox_button_pressed"]
+[connection signal="exit" from="UI/SummaryScreen" to="UI" method="on_menu_screen_exit" flags=3 binds= [ "Summary" ]]
