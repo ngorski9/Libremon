@@ -49,3 +49,7 @@ Currently, I have implemented 15 hooks, and I have 8 more planned.
 * In-game menus for inventory and parties.
 
 * A better enemy AI system, using a look-ahead algorithm.
+
+## Asset Credits
+
+The monster sprites were taken from PrincessPhoenix on reliccastle.com. The battle background and platforms were attribution free images taken from itch.io. The font and HUD were created by me.
